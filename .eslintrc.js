@@ -31,6 +31,10 @@ module.exports = {
       'linebreak-style': 0,
       'react/state-in-constructor': 0,
       'import/prefer-default-export': 0,
+      'arrow-body-style': "off",
+      "indent": "off",
+      "react/jsx-indent": "off",
+      "react/jsx-indent-props": "off",
       'max-len': [
         2,
         250,
