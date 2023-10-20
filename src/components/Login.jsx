@@ -1,12 +1,41 @@
 import React from 'react';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 // import { useNavigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import shareVideo from '../assets/share.mp4';
 import logo from '../assets/logowhite.png';
 
 const Login = () => {
-  const responseGoogle = (response) => {
-    console.log(response);
+  const responseGoogle = async (response) => {
+    const user = jwtDecode(response.credential);
+    let data = {
+        firstname: user.family_name,
+        lastname: user.given_name,
+        email: user.email,
+        username: user.email,
+        password: user.email,
+    };
+    const res = await fetch(`${process.env.REACT_APP_BACK_END_URL}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    });
+
+    if (res.status === 200) {
+        data = {
+            username: user.email,
+            password: user.email,
+        };
+        fetch(`${process.env.REACT_APP_BACK_END_URL}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        }).then((re) => {
+            return re.json();
+        }).then((us) => {
+            console.log(us);
+        });
+    }
   };
 
   return (
