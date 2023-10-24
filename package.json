@@ -17,6 +17,7 @@
     "react-masonry-css": "^1.0.16",
     "react-router-dom": "^6.17.0",
     "react-scripts": "^5.0.1",
+    "universal-cookie": "^6.1.1",
     "uuid": "^9.0.1",
     "web-vitals": "^3.5.0"
   },
